@@ -6,3 +6,25 @@ html {
   border: 1px solid black;
   padding: 10px;
 }
+h1 {
+  text-align: center;
+  size: 1000;
+  font-family:sans-serif;
+  color: crimson;
+  
+}
+#title {
+  text-align: center;
+}
+#game1Button {
+  text-align: center;
+  
+}
+#homeButton {
+  text-align: start;
+
+}
+#playGame {
+  text-align: center;
+  color:red;
+}
