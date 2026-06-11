@@ -3,16 +3,16 @@ let balls;
 let gameState = "start";
 let ballsDropped = 0;
 
-
-    console.log("setup: ");
-    function setup() {
-     function setMessage() {
+ function setMessage() {
   firebase.database().ref('/users/Jack').set(
     {
       message: 'hi'
     }
   )
 }
+    console.log("setup: ");
+    function setup() {
+
     cnv = new Canvas(1920,940);
 
     world.gravity.y = 5;
