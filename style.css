@@ -29,7 +29,22 @@ h1 {
   color:red;
 
 }
-#input{
+.input{
   text-align: center;
   color:red;
+}
+.homeButton{
+  text-align: center;
+  color:red;
+}
+#logIn{
+  text-align: center;
+  color:red
+  
+}
+#submit{
+  text-align: center;
+  color:red;
+  border-radius: 10;
+
 }
