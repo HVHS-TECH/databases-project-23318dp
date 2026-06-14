@@ -16,7 +16,8 @@ function fb_popupLogin() {
       let userImage = user.photoURL;
       let userEmail = user.email;
       let userDisplayName = user.displayName;
-
+      const gameName = document.getElementById("gameName").value; //defining name
+      const age = document.getElementById("age").value;           //defining age
       firebase.database().ref("userInfo/" + userID).set({
         gameName: gameName,
         age: age,
