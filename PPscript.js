@@ -2,13 +2,48 @@ let score = 5;
 let balls;
 let gameState = "start";
 let ballsDropped = 0;
+let highScoreSubmitted = false; //stops from spamming in CL
+// 1. Variable to hold the logged-in user's ID
+let currentUserID = null;
 
- function setMessage() {
-  firebase.database().ref('/users/Jack').set(
-    {
-      message: 'hi'
+// 2. Track authentication state changes
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    currentUserID = user.uid;
+    console.log("Game detected logged-in user:", currentUserID);
+  } else {
+    currentUserID = null;
+    console.log("No user logged in. Scores will not be saved.");
+  }
+});
+
+ function submitHighScore() {
+  // If the user isn't logged in, don't try to save anything
+  if (!currentUserID) {
+    console.log("Score not saved: User is not logged in.");
+    return;
+  }
+
+  // Path to this user's best score inside your userInfo node
+  let scoreRef = firebase.database().ref("userInfo/" + currentUserID + "/bestScore");
+
+  // grabs the current best score 
+  scoreRef.once("value").then((snapshot) => {
+    let currentBest = snapshot.val() || 0; // Defaults to 0 if they don't have a score yet
+
+    // if new score is better than old score change it
+    if (ballsDropped > currentBest) {
+      scoreRef.set(ballsDropped)
+        .then(() => {
+          console.log("New high score of " + ballsDropped + " saved successfully!");
+        })
+        .catch((error) => {
+          console.error("Error saving high score:", error);
+        });
+    } else {
+      console.log("Game over, but you didn't beat your high score of " + currentBest);
     }
-  )
+  });
 }
     console.log("setup: ");
     function setup() {
@@ -177,10 +212,13 @@ function draw() {
         text("Balls Dropped = " + ballsDropped, width/2,700);
      
         text("Refresh To Retry", width/2,400);
-        setMessage();
-        
-
-      
+      // Only submit the high score if we haven't already handled it for this round
+        if (!highScoreSubmitted) {
+            submitHighScore();
+            highScoreSubmitted = true; //closes gate
+            
+            
+        }
        
         return;
     }
@@ -199,17 +237,17 @@ function draw() {
     for (let b of balls) {
 
         if (b.overlaps(pointFour)) hitMultiplier(b, 0.4);
-        if (b.overlaps(pointSevenL)) hitMultiplier(b, 0.7);
-        if (b.overlaps(pointSevenR)) hitMultiplier(b, 0.7);
+        if (b.overlaps(pointSevenL)) hitMultiplier(b, 1);
+        if (b.overlaps(pointSevenR)) hitMultiplier(b, 1);
 
-        if (b.overlaps(oneThreeL)) hitMultiplier(b, 1);
-        if (b.overlaps(oneThreeR)) hitMultiplier(b, 1);
+        if (b.overlaps(oneThreeL)) hitMultiplier(b, 1.2);
+        if (b.overlaps(oneThreeR)) hitMultiplier(b, 1.2);
 
-        if (b.overlaps(threeL)) hitMultiplier(b, 1.4);
-        if (b.overlaps(threeR)) hitMultiplier(b, 1.4);
+        if (b.overlaps(threeL)) hitMultiplier(b, 2);
+        if (b.overlaps(threeR)) hitMultiplier(b, 2);
 
-        if (b.overlaps(thirteenL)) hitMultiplier(b, 2);
-        if (b.overlaps(thirteenR)) hitMultiplier(b, 2);
+        if (b.overlaps(thirteenL)) hitMultiplier(b, 3);
+        if (b.overlaps(thirteenR)) hitMultiplier(b, 3);
     }
     if (mouseY > 480 && mouseY <390 ) {
         gameState = "end";
@@ -220,7 +258,7 @@ function draw() {
 
 function hitMultiplier(ball, value) {
 
-    if (gameState =="game" && score <=1) {
+    if (gameState =="game" && score <<1) {
         gameState = "end";
     }
     score *= value;
@@ -232,31 +270,33 @@ function spawnBall() {
     ballsDropped += 1;
     
 }
-function mousePressed () {
-
+function mousePressed() {
     if (gameState == "start") {
-
         if (mouseY > 350 && mouseY < 410) {
             gameState = "game";
         }
-
         if (mouseY > 450 && mouseY < 510) {
             gameState = "how";
         }
-
-    }
-
+    } 
     else if (gameState == "how") {
         gameState = "start";
-    }
-
+    } 
     else if (gameState == "game") {
-        spawnBall();
-		score -=1;
-        score = Math.round(score); 
+        // 1. Check if the "End Game" button was clicked
         
+        if (mouseX > 380 && mouseX < 580 && mouseY > 350 && mouseY < 410) {
+            gameState = "end";
+            return; // Stops execution here so a ball doesn't spawn
+        }
+
+        // 2. Only allow dropping a ball if the score is 1 or more
+        if (score >= 1) {
+            spawnBall();
+            score -= 1;
+            score = Math.round(score); 
+        }
     }
-   
 }
 
 /*******************************************************/
