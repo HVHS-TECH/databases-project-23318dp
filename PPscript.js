@@ -3,10 +3,10 @@ let balls;
 let gameState = "start";
 let ballsDropped = 0;
 let highScoreSubmitted = false; //stops from spamming in CL
-// 1. Variable to hold the logged-in user's ID
+// 1. when the gme starts the variable is on Null
 let currentUserID = null;
 
-// 2. Track authentication state changes
+// 2. Track to see if user's UID is correct
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     currentUserID = user.uid;
@@ -258,7 +258,7 @@ function draw() {
 
 function hitMultiplier(ball, value) {
 
-    if (gameState =="game" && score <<1) {
+    if (gameState =="game" && score <1) {
         gameState = "end";
     }
     score *= value;
