@@ -7,29 +7,35 @@ let highScoreSubmitted = false; //stops from spamming in CL
 let currentUserID = null;
 
 // 2. Track to see if user's UID is correct
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    currentUserID = user.uid;
-    console.log("Game detected logged-in user:", currentUserID);
-  } else {
+firebase.auth().onAuthStateChanged(authStateChanged);
+
+function authStateChanged(user) {
+  if (user == null) {
     currentUserID = null;
     console.log("No user logged in. Scores will not be saved.");
+  } else {
+    currentUserID = user.uid;
+    console.log("Logged in user ID: " + currentUserID);
   }
-});
+}
 
  function submitHighScore() {
   // If the user isn't logged in, don't try to save anything
-  if (!currentUserID) {
+  if (currentUserID == null) {
     console.log("Score not saved: User is not logged in.");
     return;
   }
 
-  // Path to this user's best score inside your userInfo node
+  // Path to this user's best score inside the userInfo node
   let scoreRef = firebase.database().ref("userInfo/" + currentUserID + "/bestScore");
 
   // grabs the current best score 
   scoreRef.once("value").then((snapshot) => {
-    let currentBest = snapshot.val() || 0; // Defaults to 0 if they don't have a score yet
+    let currentBest = snapshot.val();
+
+if (currentBest == null) {
+  currentBest = 0;
+} // Defaults to 0 if they don't have a score yet
 
     // if new score is better than old score change it
     if (ballsDropped > currentBest) {
@@ -65,7 +71,7 @@ firebase.auth().onAuthStateChanged((user) => {
     leftWall.color = color(0,0,0,0);
     leftWall.stroke = '0';
     leftWall.rotation = 35
-   leftWall.visible = false;
+    leftWall.visible = false;
     rightWall = new Sprite(1125, 380, 10, 400 , 'k');
     rightWall.color = color(0,0,0,0);
     rightWall.stroke = '0';
