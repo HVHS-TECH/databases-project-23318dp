@@ -8,18 +8,33 @@
 /*******************************************************/
 console.log("Running the game");
 
+firebase.auth().onAuthStateChanged(authStateChanged);
 
+function authStateChanged(user) {
+  if (user == null) {
+    currentUserID = null;
+    console.log("No user logged in. Scores will not be saved.");
+  } else {
+    currentUserID = user.uid;
+    console.log("Logged in user ID: " + currentUserID);
+  }
+}
 // End game code
 function endGame(_player, _obstacle){
     console.log("Game ended, you got "+score+" points.")
     screenSelector = "end";
     player.remove();
     obstacles.removeAll();
+}
     // Put your database writes here:
+      
+            
+        
+       
+        return;
+    
     
 
-
-}
 
 
 

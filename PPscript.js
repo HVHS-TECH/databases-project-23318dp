@@ -30,7 +30,7 @@ function authStateChanged(user) {
   let scoreRef = firebase.database().ref("userInfo/" + currentUserID + "/bestScore");
 
   // grabs the current best score 
-  scoreRef.once("value").then((snapshot) => {
+  scoreRef.once("value", function(snapshot) {
     let currentBest = snapshot.val();
 
 if (currentBest == null) {
@@ -38,14 +38,14 @@ if (currentBest == null) {
 } // Defaults to 0 if they don't have a score yet
 
     // if new score is better than old score change it
-    if (ballsDropped > currentBest) {
-      scoreRef.set(ballsDropped)
-        .then(() => {
-          console.log("New high score of " + ballsDropped + " saved successfully!");
-        })
-        .catch((error) => {
-          console.error("Error saving high score:", error);
-        });
+  if (ballsDropped > currentBest) {
+      scoreRef.set(ballsDropped, function(error) {
+        if (error) {
+          console.log("Error saving high score: " + error);
+        } else {
+          console.log("New high score saved: " + ballsDropped);
+        }
+      });
     } else {
       console.log("Game over, but you didn't beat your high score of " + currentBest);
     }
