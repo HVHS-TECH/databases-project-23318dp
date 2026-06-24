@@ -6,68 +6,6 @@
 //
 // Written by Mr Britton
 /*******************************************************/
-console.log("Running the game");
-
-firebase.auth().onAuthStateChanged(authStateChanged);
-
-function authStateChanged(user) {
-  if (user == null) {
-    currentUserID = null;
-    console.log("No user logged in. Scores will not be saved.");
-  } else {
-    currentUserID = user.uid;
-    console.log("Logged in user ID: " + currentUserID);
-  }
-}
-// End game code
-function endGame(_player, _obstacle){
-    console.log("Game ended, you got "+score+" points.")
-    screenSelector = "end";
-    player.remove();
-    obstacles.removeAll();
-}
-    // Put your database writes here:
-      
-            
-        
-       
-        return;
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const SCREEN_WIDTH = 400;
 const SCREEN_HEIGHT = 200;
 const PLAYER_HEIGHT = 25;
@@ -85,6 +23,95 @@ var player;
 var screenSelector = "start";  
 
 var obstacles;
+console.log("Running the game");
+
+firebase.auth().onAuthStateChanged(authStateChanged);
+
+function authStateChanged(user) {
+  if (user == null) {
+    currentUserID = null;
+    console.log("No user logged in. Scores will not be saved.");
+  } else {
+    currentUserID = user.uid;
+    console.log("Logged in user ID: " + currentUserID);
+  }
+}
+// create a variable for user's best score
+  let scoreRef = firebase.database().ref("userInfo/" + currentUserID + "/bestScore2");
+
+  // grabs the current best score by taking a snapshot and assigning it to current best
+  scoreRef.once("value", function(snapshot) {
+    let currentBest = snapshot.val();
+
+    if (currentBest == null) {
+  currentBest = 0;
+} // Defaults to 0 if they don't have a score yet
+
+    // if new score is better than old score change it
+  if (score > currentBest) {
+      scoreRef.set(score, function(error) {
+        if (error) {
+          console.log("Error saving high score: " + error);
+        } else {
+          console.log("New high score saved: " + score);
+        }
+      });
+    } else {
+      console.log("Game over, but you didn't beat your high score of " + currentBest);
+    }
+  });
+
+// End game code
+function endGame(_player, _obstacle){
+    console.log("Game ended, you got "+score+" points.")
+    screenSelector = "end";
+    player.remove();
+    obstacles.removeAll();
+      return;
+}
+    // Put your database writes here:
+      
+            
+        
+       
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*******************************************************/
 // setup()
 /*******************************************************/

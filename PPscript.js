@@ -9,7 +9,7 @@ let currentUserID = null;
 // 2. Track to see if user's UID is correct
 firebase.auth().onAuthStateChanged(authStateChanged);
 
-function authStateChanged(user) {
+function authStateChanged(user) { //function to check if user is logged in and send console logs for output
   if (user == null) {
     currentUserID = null;
     console.log("No user logged in. Scores will not be saved.");
@@ -26,10 +26,10 @@ function authStateChanged(user) {
     return;
   }
 
-  // Path to this user's best score inside the userInfo node
+  // create a variable for user's best score
   let scoreRef = firebase.database().ref("userInfo/" + currentUserID + "/bestScore");
 
-  // grabs the current best score 
+  // grabs the current best score by taking a snapshot and assigning it to current best
   scoreRef.once("value", function(snapshot) {
     let currentBest = snapshot.val();
 
