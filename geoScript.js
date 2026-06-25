@@ -19,10 +19,10 @@ var spawnDist = 0;
 var nextSpawn = 0;
 var score = 0;
 var player;
-  
+  let highScoreSubmitted = false;
 var screenSelector = "start";  
 let currentUserID = null;
-let highScoreSubmitted = false; 
+
 var obstacles;
 console.log("Running the game");
 
