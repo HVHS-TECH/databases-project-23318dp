@@ -5,7 +5,7 @@ let ballsDropped = 0;
 let highScoreSubmitted = false; //stops from spamming in CL
 // 1. when the gme starts the variable is on Null
 let currentUserID = null;
-
+   
 // 2. Track to see if user's UID is correct
 firebase.auth().onAuthStateChanged(authStateChanged);
 
@@ -27,7 +27,7 @@ function authStateChanged(user) { //function to check if user is logged in and s
   }
 
   // create a variable for user's best score
-  let scoreRef = firebase.database().ref("userInfo/" + currentUserID + "/bestScore");
+  let scoreRef = firebase.database().ref("userInfo/" + currentUserID + "/bestScore1");
 
   // grabs the current best score by taking a snapshot and assigning it to current best
   scoreRef.once("value", function(snapshot) {

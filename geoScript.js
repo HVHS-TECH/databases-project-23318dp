@@ -21,7 +21,8 @@ var score = 0;
 var player;
   
 var screenSelector = "start";  
-
+let currentUserID = null;
+let highScoreSubmitted = false; 
 var obstacles;
 console.log("Running the game");
 
@@ -36,6 +37,11 @@ function authStateChanged(user) {
     console.log("Logged in user ID: " + currentUserID);
   }
 }
+function saveHighScore() {
+if (currentUserID == null) {
+    console.log("No user is logged in, Score NOT saved")
+}
+
 // create a variable for user's best score
   let scoreRef = firebase.database().ref("userInfo/" + currentUserID + "/bestScore2");
 
@@ -59,14 +65,17 @@ function authStateChanged(user) {
     } else {
       console.log("Game over, but you didn't beat your high score of " + currentBest);
     }
-  });
+  })};
 
 // End game code
 function endGame(_player, _obstacle){
     console.log("Game ended, you got "+score+" points.")
+
+    saveHighScore();
     screenSelector = "end";
     player.remove();
     obstacles.removeAll();
+    
       return;
 }
     // Put your database writes here:
