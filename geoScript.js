@@ -40,6 +40,7 @@ function authStateChanged(user) {
 function saveHighScore() {
 if (currentUserID == null) {
     console.log("No user is logged in, Score NOT saved")
+    return;
 }
 
 // create a variable for user's best score
@@ -48,7 +49,7 @@ if (currentUserID == null) {
   // grabs the current best score by taking a snapshot and assigning it to current best
   scoreRef.once("value", function(snapshot) {
     let currentBest = snapshot.val();
-
+    
     if (currentBest == null) {
   currentBest = 0;
 } // Defaults to 0 if they don't have a score yet
@@ -66,6 +67,8 @@ if (currentUserID == null) {
       console.log("Game over, but you didn't beat your high score of " + currentBest);
     }
   })};
+const element = document.getElementById ("highScore")
+element.textContent = currentBest;
 
 // End game code
 function endGame(_player, _obstacle){
@@ -78,6 +81,7 @@ function endGame(_player, _obstacle){
     
       return;
 }
+
     // Put your database writes here:
       
             

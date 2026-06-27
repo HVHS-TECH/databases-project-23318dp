@@ -19,10 +19,11 @@
   <!-- firebase end ******************************************-->
   <script src="fb_setup.js"></script>
   <script src="script.js"></script>
-  <script src="game2.js"></script>
-
+  <script src="leaderboard.js"></script>
+  
 
 </head>
+<body onLoad="loadGame2Leaderboard()">
 <div id="homeButton">
   <button onclick="location.href='index.html'">Go home</button>
 </div>
@@ -33,3 +34,8 @@
 <div id="playGame">
  <button onclick="location.href='geoIndex.html'">Play game2</button>
 </div>
+<h2>Leaderboard</h2>
+<div id="leaderboard">
+ Loading...
+</div>
+</body>
