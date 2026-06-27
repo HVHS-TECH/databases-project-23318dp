@@ -1,3 +1,34 @@
+let curretUser = null;
+
+firebase.auth().onAuthStateChanged(function(user){
+  if (user) {
+    currentUser = user;
+    console.log("Logged in");
+
+    let pfp = document.getElementById("userPfp");
+    if (pfp && user.photoURL) {
+        pfp.src = user.photoURL;
+      }
+  }
+} else {
+  currentUser = null;
+  console.log("Not logged in")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function fb_popupLogin() {
 
   firebase.auth().onAuthStateChanged((user) => {

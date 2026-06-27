@@ -10,7 +10,9 @@ function loadGame2Leaderboard() {    //create function for leaderboard
         if (userData.bestScore2 != null) {  //check wether the user has a score and add it to leaderborard 
         leaderboard.innerHTML +=
           "<p>" + userData.gameName + ": " + userData.bestScore2 + "</p>";
-   }
+
+        }
+
     });
   });
 }
