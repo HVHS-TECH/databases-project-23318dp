@@ -18,12 +18,13 @@
   <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
   <!-- firebase end ******************************************-->
   <script src="fb_setup.js"></script>
-  <script src="script.js"></script>
+  <script src="leaderboard.js"></script>
   <script src="game2.js"></script>
 
 
 
 </head>
+<body onLoad="loadGame1Leaderboard()"></body>
 <div id="homeButton">
   <button onclick="location.href='index.html'">Go home</button>
 </div>
@@ -31,6 +32,15 @@
 <div id="title">
   <p>Welcome to Pussum Plinko</p>
 </div>
+
 <div id="playGame">
   <button onclick="location.href='PPIndex.html'">Play Pussum Plinko</button>
 </div>
+<div id="heading2">
+  </div>
+<h2> leaderboard:</h2>
+
+<div id="leaderboard">
+  Loading Leaderboard...
+</div>
+</body>
