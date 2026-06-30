@@ -12,8 +12,8 @@ body{
   background-color: white;
   width: 350px;
   padding: 30px;
-  border-radius: 20px;
-  text-align: center;'
+  border-radius: 50px;
+  text-align: center;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 
 }
@@ -33,7 +33,7 @@ body{
   margin-bottom: 20px;
 }
 .input{
-  display: felx;
+  display: flex;
   flex-direction: column;
   text-align:left;
   gap: 8px;
@@ -63,7 +63,7 @@ button:hover {
   background-color: #5c2a71;
 }
 #homeButton{
-  postion: absolute;
+  position: absolute;
   top:20px;
   left:20px;
 }
@@ -73,6 +73,23 @@ button:hover {
   font-weight: bold;
   margin-top: 15px;
 }
-.menuPage {
+.menuCard{
+  background-color: white;
+  width:400px;
+  padding:30px;
+}
+.menuButtons{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+
+}
+.menuCard h1 {
+  color: #7d3c98;
+  margin-bottom: 10px;
+}
+.menuCard h2 {
+  color:#7d3c98;
+  margin-top:25px;
 
 }
