@@ -50,6 +50,8 @@ h1 {
 }
 #leaderboard {
   text-align: center;
+  color: red;
+  border-radius: 100px;
 }
 .h2{
   text-align: center;
