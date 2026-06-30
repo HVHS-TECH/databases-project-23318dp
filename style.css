@@ -1,61 +1,78 @@
-html {
-  height: 100%;
-  width: 100%;
+
+body{
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #c39bd3;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-#databaseOutput {
-  border: 1px solid black;
-  padding: 10px;
-}
-h1 {
-  text-align: center;
-  size: 1000;
-  font-family:sans-serif;
-  color: crimson;
-  
-}
-#title {
-  text-align: center;
-}
-#game1Button {
-  text-align: center;
-  
-}
-#homeButton {
-  text-align: start;
+.loginCard{
+  background-color: white;
+  width: 350px;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;'
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 
 }
-#playGame {
-  text-align: center;
-  color:red;
-
+.loginCard h1{
+   margin-bottom: 5px;
+}
+.subtitle {
+  color: #555;
+  margin-bottom: 20px;
+}
+#userPfp {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #ddd;
+  margin-bottom: 20px;
 }
 .input{
-  text-align: center;
-  color:red;
+  display: felx;
+  flex-direction: column;
+  text-align:left;
+  gap: 8px;
+  margin-top:20px;
 }
-.homeButton{
-  text-align: center;
-  color:red;
+.input label {
+  font-weight: bold;
 }
-#logIn{
-  text-align: center;
-  color:red
-  
-}
-#submit{
-  text-align: center;
-  color:red;
-  border-radius: 10;
+.input input {
+  padding: 10px;
+  border:2px solid #c39bd3;
+  border-radius: 8px;
+  font-size: 16px;
 
 }
-#leaderboard {
-  text-align: center;
-  color: red;
-  border-radius: 100px;
+button {
+  background-color: #7d3c98;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  margin-top: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
 }
-.h2{
-  text-align: center;
+button:hover {
+  background-color: #5c2a71;
 }
-#heading {
-  text-align: center;
+#homeButton{
+  postion: absolute;
+  top:20px;
+  left:20px;
+}
+
+#statusMessage {
+  color:green;
+  font-weight: bold;
+  margin-top: 15px;
+}
+.menuPage {
+
 }

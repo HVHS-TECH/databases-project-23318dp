@@ -23,26 +23,38 @@
 
 </head>
 <body>
-  
-  <img id = "userPfp" src ="" alt="Welcome, Please log in">
-<div id="homeButton">
+  <div id="homeButton">
   <button onclick="location.href='index.html'">Go home</button>
 </div>
-<div id="logIn">
+  
+
+
+<div class="loginCard">
+
+  <h1>Welcome</h1>
+  <p class = "subtitle"> Log in and create your profile </p>
+  <img id = "userPfp" src ="" alt="Welcome, Please log in">
+  <div id="login">
    <button onclick="fb_popupLogin()">Login with Google</button>
    </div>
+
+ 
+
           <div class="input">
-            <form>
+            
                 <label for="gameName">User name:</label>
                 <input type="text" id="gameName" name="gameName" required />
                 <label for="age">age:</label>
                 <input type="text" id="age" name="age" required />
             </div>
-           </form> 
+           
+
     <div id="submit">
     <button onclick="submitInfo()">Submit</button>
       </div>
+
 <p id="statusMessage"></p>
+ </div>
     
 </body>
 </html>
@@ -62,4 +74,3 @@
 
 
 
-</body>
